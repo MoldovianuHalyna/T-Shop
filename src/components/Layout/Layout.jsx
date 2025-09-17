@@ -6,7 +6,6 @@ import Footer from "../Footer/Footer";
 const Layout = () => {
   return (
     <div>
-      <NavigationBar />
       <main style={{ padding: "1rem" }}>
         <Outlet />
       </main>
