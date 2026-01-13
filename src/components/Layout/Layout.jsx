@@ -59,7 +59,7 @@ const Layout = () => {
       <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-b from-accent-soft/60 via-transparent to-transparent" />
       <NavigationBar onToggleTheme={toggleTheme} theme={theme} />
       <main className="mx-auto w-full max-w-7xl px-4 pb-20 pt-12 md:px-10">
-        <div className="relative overflow-hidden rounded-[24px] border border-border/60 bg-surface/70 shadow-[0_20px_60px_-20px_rgba(15,23,42,0.35)] backdrop-blur-xl">
+        <div className="relative overflow-hidden rounded-[24px] bg-surface/70 shadow-[0_20px_60px_-20px_rgba(15,23,42,0.35)] backdrop-blur-xl">
           <div className="absolute inset-x-6 top-0 h-1 rounded-b-full bg-gradient-to-r from-accent/90 via-accent-soft to-transparent" />
           <div className="relative px-6 pb-10 pt-8 md:px-10">
             <Outlet />

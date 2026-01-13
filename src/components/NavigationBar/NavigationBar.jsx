@@ -1,5 +1,5 @@
 import { Link, NavLink } from "react-router-dom";
-import { ShoppingBag, SunMedium, MoonStar, Shirt } from "lucide-react";
+import { ShoppingBag, Shirt, Sun, Moon } from "lucide-react";
 
 const links = [
   { to: "/", label: "Home" },
@@ -61,11 +61,7 @@ const NavigationBar = ({ onToggleTheme, theme }) => {
               isDark ? "Switch to light theme" : "Switch to dark theme"
             }
           >
-            {isDark ? (
-              <SunMedium className="h-5 w-5" strokeWidth={1.75} />
-            ) : (
-              <MoonStar className="h-5 w-5" strokeWidth={1.75} />
-            )}
+            {isDark ? <Sun size={20} /> : <Moon size={20} />}
           </button>
 
           <Link

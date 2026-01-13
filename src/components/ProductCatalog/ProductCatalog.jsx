@@ -32,7 +32,7 @@ const ProductCatalog = () => {
             key={title}
             className="group relative flex flex-col overflow-hidden rounded-[22px] border border-border/60 bg-surface/80 p-5 shadow-[0_24px_60px_-36px_rgba(15,23,42,0.55)] transition hover:-translate-y-1 hover:border-accent/70"
           >
-            <div className="relative mb-4 flex h-48 items-center justify-center overflow-hidden rounded-[20px] border border-border/50 bg-gradient-to-br from-accent-soft/50 via-bg/70 to-transparent">
+            <div className="relative mb-4 flex h-48 items-center justify-center overflow-hidden rounded-[20px]  bg-gradient-to-br from-accent-soft/50 via-bg/70 to-transparent">
               <Shirt
                 className="h-16 w-16 text-accent transition-transform group-hover:scale-110"
                 strokeWidth={1.75}

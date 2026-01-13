@@ -7,11 +7,11 @@ import SearchBar from "../../components/SearchBar/SearchBar";
 const Homepage = () => {
   return (
     <section className="flex flex-col gap-10">
-      <div className="relative overflow-hidden rounded-[28px] border border-border/60 bg-gradient-to-br from-accent-soft/70 via-surface/90 to-transparent p-8 shadow-[0_32px_80px_-40px_rgba(99,102,241,0.55)] md:p-12">
+      <div className="relative overflow-hidden rounded-[28px] bg-gradient-to-br from-accent-soft/70 via-surface/90 to-transparent p-8 shadow-[0_32px_80px_-40px_rgba(99,102,241,0.55)] md:p-12">
         <div className="absolute -right-6 -top-16 hidden h-40 w-40 rotate-12 rounded-full bg-accent-soft blur-3xl md:block" />
         <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
           <div className="flex flex-col gap-5">
-            <span className="inline-flex max-w-fit items-center gap-2 rounded-full border border-border/40 bg-bg/70 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-textSecondary">
+            <span className="inline-flex max-w-fit items-center gap-2 rounded-full bg-bg/70 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-textSecondary">
               <Sparkles className="h-4 w-4 text-accent" strokeWidth={1.75} />
               New Season • Fresh Cuts
             </span>
@@ -47,7 +47,7 @@ const Homepage = () => {
       </div>
 
       <div className="grid gap-8 lg:grid-cols-[280px_1fr]">
-        <aside className="h-full overflow-hidden rounded-[24px] border border-border/60 bg-surface/80 p-6 backdrop-blur-xl">
+        <aside className="h-full overflow-hidden rounded-[24px] bg-surface/80 p-6 backdrop-blur-xl shadow-[0_20px_48px_-28px_rgba(99,102,241,0.9)]">
           <FilterSideBar />
         </aside>
         <div className="flex flex-col gap-6">
