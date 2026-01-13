@@ -4,7 +4,7 @@ const trendingTags = ["Sage", "Oversized", "Graphic", "Relaxed", "New Drop"];
 
 const SearchBar = () => {
   return (
-    <div className="flex flex-col gap-4 rounded-[24px] border border-border/60 bg-bg/70 p-5 shadow-sm backdrop-blur-xl">
+    <div className="flex flex-col gap-4 rounded-[24px] bg-bg/70 p-5 shadow-[0_20px_48px_-28px_rgba(99,102,241,0.9)] backdrop-blur-xl">
       <div className="flex flex-col gap-3 md:flex-row md:items-center md:gap-4">
         <div className="relative flex-1">
           <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-textSecondary">

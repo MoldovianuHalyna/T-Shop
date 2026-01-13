@@ -43,7 +43,7 @@ const FilterSideBar = () => {
           return (
             <div
               key={title}
-              className="rounded-2xl border border-border/50 bg-bg/70 p-4 shadow-sm"
+              className="rounded-2xl bg-bg/70 p-4 shadow-sm shadow-[0_20px_48px_-28px_rgba(99,102,241,0.9)]"
             >
               <div className="mb-4 flex items-start gap-3">
                 <span className="flex h-10 w-10 items-center justify-center rounded-2xl border border-border/40 bg-surface/80">

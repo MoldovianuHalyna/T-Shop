@@ -14,17 +14,17 @@
   --font-weight-bold: 700;
 
   /* Palette */
-  --bg-color: #f3f4f6;
-  --secondary-bg-color: #dfe3ec;
-  --surface-color: rgba(255, 255, 255, 0.78);
-  --primary-text-color: #101828;
-  --secondary-text-color: #475467;
-  --accent-color: #6366f1;
-  --accent-soft-color: rgba(99, 102, 241, 0.22);
-  --hover-bg-color: rgba(15, 23, 42, 0.06);
-  --border-color: rgba(15, 23, 42, 0.14);
-  --glow-primary: rgba(99, 102, 241, 0.2);
-  --glow-secondary: rgba(56, 189, 248, 0.22);
+  --bg-color: #f5ede1;
+  --secondary-bg-color: #e6d5c3;
+  --surface-color: rgba(255, 255, 255, 0.82);
+  --primary-text-color: #2f1c11;
+  --secondary-text-color: #7a5d47;
+  --accent-color: #b86a40;
+  --accent-soft-color: rgba(184, 106, 64, 0.28);
+  --hover-bg-color: rgba(79, 58, 46, 0.08);
+  --border-color: rgba(84, 60, 44, 0.18);
+  --glow-primary: rgba(184, 106, 64, 0.22);
+  --glow-secondary: rgba(208, 162, 118, 0.2);
 
   /* Radius & spacing */
   --radius-sm: 8px;
@@ -49,17 +49,17 @@
 
 [data-theme="dark"] {
   color-scheme: dark;
-  --bg-color: #0f172a;
-  --secondary-bg-color: #111827;
-  --surface-color: rgba(30, 41, 59, 0.78);
-  --primary-text-color: #f8fafc;
-  --secondary-text-color: #cbd5f5;
-  --accent-color: #38bdf8;
-  --accent-soft-color: rgba(56, 189, 248, 0.28);
-  --hover-bg-color: rgba(148, 163, 184, 0.18);
-  --border-color: rgba(148, 163, 184, 0.26);
-  --glow-primary: rgba(99, 102, 241, 0.35);
-  --glow-secondary: rgba(34, 211, 238, 0.28);
+  --bg-color: #1c130f;
+  --secondary-bg-color: #261912;
+  --surface-color: rgba(45, 31, 24, 0.84);
+  --primary-text-color: #f7efe6;
+  --secondary-text-color: #d6c3b5;
+  --accent-color: #d69256;
+  --accent-soft-color: rgba(214, 146, 86, 0.3);
+  --hover-bg-color: rgba(245, 229, 210, 0.12);
+  --border-color: rgba(166, 120, 82, 0.32);
+  --glow-primary: rgba(214, 146, 86, 0.35);
+  --glow-secondary: rgba(120, 78, 52, 0.28);
 }
 
 body {
@@ -136,7 +136,7 @@ button {
 
 button:hover {
   transform: translateY(-1px);
-  background-color: rgba(99, 102, 241, 0.9);
+  background-color: rgba(184, 106, 64, 0.92);
 }
 
 button:focus,
