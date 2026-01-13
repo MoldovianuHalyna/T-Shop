@@ -6,10 +6,12 @@ export default {
       colors: {
         bg: "var(--bg-color)",
         secondaryBg: "var(--secondary-bg-color)",
+        surface: "var(--surface-color)",
         text: "var(--primary-text-color)",
         textSecondary: "var(--secondary-text-color)",
         accent: "var(--accent-color)",
-        border: "var(--border)",
+        accentSoft: "var(--accent-soft-color)",
+        border: "var(--border-color)",
         hover: "var(--hover-bg-color)",
       },
       fontFamily: {
