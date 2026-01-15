@@ -7,7 +7,7 @@ const ProductItem = ({ product, onSelect }) => {
     <button
       type="button"
       onClick={onSelect}
-      className="group relative flex flex-col overflow-hidden rounded-[22px] border border-border/60 bg-secondaryBg p-5 text-left shadow-[0_24px_60px_-36px_rgba(15,23,42,0.55)] transition hover:-translate-y-1 hover:border-accent/70 focus:outline-none focus-visible:ring-4 focus-visible:ring-accentSoft/60"
+      className="group relative flex flex-col overflow-hidden rounded-[22px] border border-border/60 bg-secondaryBg p-5 text-left shadow-[0_24px_60px_-36px_rgba(15,23,42,0.55)] transition hover:-translate-y-1 hover:bg-red-50 hover:border-accent/70 focus:outline-none focus-visible:ring-4 focus-visible:ring-accentSoft/60"
     >
       <div className="relative mb-4 flex h-48 items-center justify-center overflow-hidden rounded-[20px] bg-gradient-to-br from-accent-soft/50 via-bg/70 to-transparent">
         <Shirt

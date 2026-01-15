@@ -1,49 +1,57 @@
-import { SlidersHorizontal, Sparkles, Droplet, Palette } from "lucide-react";
+import {
+  SlidersHorizontal,
+  Sparkles,
+  Droplet,
+  Palette,
+  RotateCcw,
+} from "lucide-react";
 
-const filterGroups = [
-  {
-    title: "Style",
-    description: "Pick the vibe that matches your mood.",
-    icon: Sparkles,
-    options: ["All", "Minimal", "Graphic", "Statement"],
-  },
-  {
-    title: "Fit",
-    description: "Dial in the silhouette you love.",
-    icon: SlidersHorizontal,
-    options: ["Relaxed", "Classic", "Oversized", "Fitted"],
-  },
-  {
-    title: "Material",
-    description: "Responsibly sourced fabrics only.",
-    icon: Droplet,
-    options: ["Organic Cotton", "Recycled Blend", "Hemp Mix", "Supima"],
-  },
-  {
-    title: "Palette",
-    description: "Switch up your tonal story.",
-    icon: Palette,
-    options: ["Earth", "Neutrals", "Vibrant", "Monochrome"],
-  },
-];
+const iconMap = {
+  style: Sparkles,
+  fit: SlidersHorizontal,
+  materialTag: Droplet,
+  palette: Palette,
+};
 
-const FilterSideBar = () => {
+const FilterSideBar = ({
+  filters = [],
+  selectedFilters = {},
+  onToggleOption,
+  onResetFilters,
+}) => {
+  const hasActiveFilters = Object.values(selectedFilters).some(
+    (options) => options?.length
+  );
+
   return (
     <aside className="flex flex-col gap-6">
       <header className="flex flex-col gap-2">
-        <h2 className="text-lg font-semibold text-text">Filters</h2>
+        <div className="flex items-center justify-between">
+          <h2 className="text-lg font-semibold text-text">Filters</h2>
+          <button
+            type="button"
+            onClick={onResetFilters}
+            className="inline-flex items-center gap-2 rounded-full border border-border/40 bg-surface/80 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-textSecondary transition hover:border-accent/60 hover:text-accent disabled:opacity-50"
+            disabled={!hasActiveFilters}
+          >
+            <RotateCcw className="h-3.5 w-3.5" strokeWidth={1.75} />
+            Reset
+          </button>
+        </div>
         <p className="text-sm text-textSecondary">
           Tune your selection — updates arrive weekly.
         </p>
       </header>
       <div className="space-y-6">
-        {filterGroups.map((group) => {
-          const { title, description, icon: Icon, options } = group;
+        {filters.map((group) => {
+          const { key, title, description, options } = group;
+          const Icon = iconMap[key] ?? Sparkles;
+          const activeSet = new Set(selectedFilters[key] ?? []);
 
           return (
             <div
-              key={title}
-              className="rounded-2xl bg-bg/70 p-4 shadow-sm shadow-[0_20px_48px_-28px_rgba(99,102,241,0.9)]"
+              key={key}
+              className="rounded-2xl border border-border/50 bg-bg/70 p-4 shadow-sm"
             >
               <div className="mb-4 flex items-start gap-3">
                 <span className="flex h-10 w-10 items-center justify-center rounded-2xl border border-border/40 bg-surface/80">
@@ -55,21 +63,30 @@ const FilterSideBar = () => {
                 </div>
               </div>
               <div className="flex flex-col gap-2">
-                {options.map((option) => (
-                  <label
-                    key={option}
-                    className="flex cursor-pointer items-center gap-3 rounded-xl border border-transparent px-3 py-2 text-sm font-medium text-text transition-colors hover:border-border/40 hover:bg-hover/60"
-                  >
-                    <input
-                      type="checkbox"
-                      name={title.toLowerCase()}
-                      value={option}
-                      className="h-4 w-4 rounded border-border/50 text-accent focus:ring-accent"
-                      defaultChecked={option === "All"}
-                    />
-                    <span>{option}</span>
-                  </label>
-                ))}
+                {options.map((option) => {
+                  const isActive = activeSet.has(option);
+
+                  return (
+                    <label
+                      key={option}
+                      className={`flex cursor-pointer items-center gap-3 rounded-xl border px-3 py-2 text-sm font-medium transition-colors ${
+                        isActive
+                          ? "border-accent/70 bg-accentSoft/20 text-text"
+                          : "border-transparent text-text hover:border-border/40 hover:bg-hover/60"
+                      }`}
+                    >
+                      <input
+                        type="checkbox"
+                        name={key}
+                        value={option}
+                        className="h-4 w-4 rounded border-border/50 text-accent focus:ring-accent"
+                        checked={isActive}
+                        onChange={() => onToggleOption?.(key, option)}
+                      />
+                      <span>{option}</span>
+                    </label>
+                  );
+                })}
               </div>
             </div>
           );

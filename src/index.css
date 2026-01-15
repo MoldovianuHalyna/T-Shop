@@ -14,17 +14,17 @@
   --font-weight-bold: 700;
 
   /* Palette */
-  --bg-color: #f5ede1;
-  --secondary-bg-color: #e6d5c3;
-  --surface-color: rgba(255, 255, 255, 0.82);
-  --primary-text-color: #2f1c11;
-  --secondary-text-color: #7a5d47;
-  --accent-color: #b86a40;
-  --accent-soft-color: rgba(184, 106, 64, 0.28);
-  --hover-bg-color: rgba(79, 58, 46, 0.08);
-  --border-color: rgba(84, 60, 44, 0.18);
-  --glow-primary: rgba(184, 106, 64, 0.22);
-  --glow-secondary: rgba(208, 162, 118, 0.2);
+  --bg-color: #f7f4fb;
+  --secondary-bg-color: #ece4ff;
+  --surface-color: rgba(255, 255, 255, 0.86);
+  --primary-text-color: #241b3b;
+  --secondary-text-color: #6c5d8f;
+  --accent-color: #8b5cf6;
+  --accent-soft-color: rgba(139, 92, 246, 0.24);
+  --hover-bg-color: rgba(139, 92, 246, 0.12);
+  --border-color: rgba(116, 85, 198, 0.18);
+  --glow-primary: rgba(139, 92, 246, 0.22);
+  --glow-secondary: rgba(196, 181, 253, 0.24);
 
   /* Radius & spacing */
   --radius-sm: 8px;
@@ -49,17 +49,17 @@
 
 [data-theme="dark"] {
   color-scheme: dark;
-  --bg-color: #1c130f;
-  --secondary-bg-color: #261912;
-  --surface-color: rgba(45, 31, 24, 0.84);
-  --primary-text-color: #f7efe6;
-  --secondary-text-color: #d6c3b5;
-  --accent-color: #d69256;
-  --accent-soft-color: rgba(214, 146, 86, 0.3);
-  --hover-bg-color: rgba(245, 229, 210, 0.12);
-  --border-color: rgba(166, 120, 82, 0.32);
-  --glow-primary: rgba(214, 146, 86, 0.35);
-  --glow-secondary: rgba(120, 78, 52, 0.28);
+  --bg-color: #140a24;
+  --secondary-bg-color: #1d1033;
+  --surface-color: rgba(58, 37, 89, 0.82);
+  --primary-text-color: #f3ecff;
+  --secondary-text-color: #cbb8f5;
+  --accent-color: #c084fc;
+  --accent-soft-color: rgba(192, 132, 252, 0.32);
+  --hover-bg-color: rgba(192, 132, 252, 0.16);
+  --border-color: rgba(168, 132, 228, 0.3);
+  --glow-primary: rgba(192, 132, 252, 0.36);
+  --glow-secondary: rgba(124, 58, 237, 0.28);
 }
 
 body {
@@ -136,7 +136,7 @@ button {
 
 button:hover {
   transform: translateY(-1px);
-  background-color: rgba(184, 106, 64, 0.92);
+  background-color: rgba(139, 92, 246, 0.9);
 }
 
 button:focus,
