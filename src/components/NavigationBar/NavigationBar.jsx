@@ -3,9 +3,8 @@ import { ShoppingBag, Shirt, Sun, Moon } from "lucide-react";
 
 const links = [
   { to: "/", label: "Home" },
-  { to: "/collections", label: "Collections" },
   { to: "/cart", label: "Cart" },
-  { to: "/about", label: "About" },
+  { to: "/about", label: "AboutPage" },
 ];
 
 const NavigationBar = ({ onToggleTheme, theme }) => {
