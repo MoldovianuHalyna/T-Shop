@@ -1,10 +1,70 @@
+import { useMemo, useState } from "react";
 import { ArrowRight, Sparkles, Shirt } from "lucide-react";
 
 import FilterSideBar from "../../components/FilterSideBar/FilterSideBar";
 import ProductCatalog from "../../components/ProductCatalog/ProductCatalog";
 import SearchBar from "../../components/SearchBar/SearchBar";
+import { products } from "../../data/products";
 
 const Homepage = () => {
+  const filterGroups = useMemo(() => {
+    const uniqueValues = (key) =>
+      Array.from(new Set(products.map((product) => product[key]))).sort();
+
+    return [
+      {
+        key: "style",
+        title: "Style",
+        description: "Pick the vibe that matches your mood.",
+        options: uniqueValues("style"),
+      },
+      {
+        key: "fit",
+        title: "Fit",
+        description: "Dial in the silhouette you love.",
+        options: uniqueValues("fit"),
+      },
+      {
+        key: "materialTag",
+        title: "Material",
+        description: "Responsibly sourced fabrics only.",
+        options: uniqueValues("materialTag"),
+      },
+      {
+        key: "palette",
+        title: "Palette",
+        description: "Switch up your tonal story.",
+        options: uniqueValues("palette"),
+      },
+    ];
+  }, []);
+
+  const [activeFilters, setActiveFilters] = useState(() =>
+    Object.fromEntries(filterGroups.map(({ key }) => [key, []]))
+  );
+
+  const handleToggleFilter = (groupKey, option) => {
+    setActiveFilters((prev) => {
+      const current = new Set(prev[groupKey] ?? []);
+      if (current.has(option)) {
+        current.delete(option);
+      } else {
+        current.add(option);
+      }
+
+      return {
+        ...prev,
+        [groupKey]: Array.from(current),
+      };
+    });
+  };
+
+  const handleResetFilters = () => {
+    setActiveFilters(
+      Object.fromEntries(filterGroups.map(({ key }) => [key, []]))
+    );
+  };
+
   return (
     <section className="flex flex-col gap-10">
       <div className="relative overflow-hidden rounded-[28px] bg-gradient-to-br from-accent-soft/70 via-surface/90 to-transparent p-8 shadow-[0_32px_80px_-40px_rgba(99,102,241,0.55)] md:p-12">
@@ -48,11 +108,16 @@ const Homepage = () => {
 
       <div className="grid gap-8 lg:grid-cols-[280px_1fr]">
         <aside className="h-full overflow-hidden rounded-[24px] bg-surface/80 p-6 backdrop-blur-xl shadow-[0_20px_48px_-28px_rgba(99,102,241,0.9)]">
-          <FilterSideBar />
+          <FilterSideBar
+            filters={filterGroups}
+            selectedFilters={activeFilters}
+            onToggleOption={handleToggleFilter}
+            onResetFilters={handleResetFilters}
+          />
         </aside>
         <div className="flex flex-col gap-6">
           <SearchBar />
-          <ProductCatalog />
+          <ProductCatalog filters={activeFilters} />
         </div>
       </div>
     </section>

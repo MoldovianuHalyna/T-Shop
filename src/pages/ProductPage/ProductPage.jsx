@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { Link, Navigate, useLocation, useParams } from "react-router-dom";
 import { ArrowLeft, Shirt } from "lucide-react";
 
@@ -14,6 +14,10 @@ const ProductPage = () => {
     }
     return products.find((item) => item.id === id);
   }, [id, location.state?.product]);
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [product?.id]);
 
   if (!product) {
     return <Navigate to="/" replace />;

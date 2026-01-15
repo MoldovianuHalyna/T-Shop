@@ -4,7 +4,7 @@ import { ShoppingBag, Shirt, Sun, Moon } from "lucide-react";
 const links = [
   { to: "/", label: "Home" },
   { to: "/cart", label: "Cart" },
-  { to: "/about", label: "AboutPage" },
+  { to: "/about", label: "About" },
 ];
 
 const NavigationBar = ({ onToggleTheme, theme }) => {
