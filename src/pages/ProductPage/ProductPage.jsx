@@ -3,6 +3,7 @@ import { Link, Navigate, useLocation, useParams } from "react-router-dom";
 import { ArrowLeft, Shirt } from "lucide-react";
 
 import { products } from "../../data/products";
+import { Button } from "../../components/ui/button";
 
 const ProductPage = () => {
   const { id } = useParams();
@@ -80,12 +81,12 @@ const ProductPage = () => {
             </div>
           </div>
 
-          <button
+          <Button
             type="button"
-            className="inline-flex items-center justify-center gap-3 rounded-full border border-transparent bg-accent px-6 py-3 text-sm font-semibold text-white shadow-[0_24px_60px_-36px_rgba(214,146,86,0.75)] transition hover:-translate-y-0.5"
+            className="gap-3 px-6 py-3 text-sm shadow-[0_24px_60px_-36px_rgba(214,146,86,0.75)] hover:-translate-y-0.5"
           >
             Join waitlist
-          </button>
+          </Button>
         </aside>
       </div>
     </section>

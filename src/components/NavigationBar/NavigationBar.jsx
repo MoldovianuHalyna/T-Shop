@@ -1,6 +1,8 @@
 import { Link, NavLink } from "react-router-dom";
 import { ShoppingBag, Shirt, Sun, Moon } from "lucide-react";
 
+import { Button } from "../ui/button";
+
 const links = [
   { to: "/", label: "Home" },
   { to: "/cart", label: "Cart" },
@@ -52,24 +54,31 @@ const NavigationBar = ({ onToggleTheme, theme }) => {
         </nav>
 
         <div className="flex items-center gap-4">
-          <button
+          <Button
             type="button"
+            variant="icon"
+            size="icon"
+            shape="soft"
             onClick={onToggleTheme}
-            className="group inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-border/60 bg-surface/80 text-text transition-transform hover:-translate-y-0.5 hover:shadow-[0_14px_30px_-20px_rgba(99,102,241,0.55)]"
             aria-label={
               isDark ? "Switch to light theme" : "Switch to dark theme"
             }
+            className="group hover:shadow-[0_14px_30px_-20px_rgba(99,102,241,0.55)]"
           >
             {isDark ? <Sun size={20} /> : <Moon size={20} />}
-          </button>
+          </Button>
 
-          <Link
-            to="/cart"
-            className="inline-flex items-center gap-2 rounded-full border border-transparent bg-accent px-5 py-2 text-sm font-semibold text-white shadow-[0_18px_40px_-24px_rgba(99,102,241,0.95)] transition-transform hover:-translate-y-0.5 hover:shadow-[0_22px_44px_-24px_rgba(99,102,241,0.95)]"
+          <Button
+            asChild
+            shape="pill"
+            className="px-5 py-2"
+            variant="secondary"
           >
-            <ShoppingBag className="h-4 w-4" strokeWidth={1.75} />
-            Shop Now
-          </Link>
+            <Link to="/cart">
+              <ShoppingBag className="h-4 w-4" strokeWidth={1.75} />
+              Shop Now
+            </Link>
+          </Button>
         </div>
       </div>
     </header>

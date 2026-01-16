@@ -1,5 +1,8 @@
 import { Minus, Plus, Trash2, Gift, Truck } from "lucide-react";
 
+import { Button } from "../../components/ui/button";
+import { Input } from "../../components/ui/input";
+
 const cartItems = [
   {
     id: "midnight-flux",
@@ -90,13 +93,15 @@ const CartPage = () => {
                   </div>
                 </div>
 
-                <button
+                <Button
                   type="button"
-                  className="inline-flex items-center gap-2 rounded-full border border-border/40 bg-surface/80 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-textSecondary transition hover:border-accent hover:text-accent"
+                  variant="subtle"
+                  size="sm"
+                  className="gap-2 border-border/40 bg-surface/80 px-4 py-2 uppercase tracking-[0.2em] text-textSecondary hover:border-accent hover:text-accent"
                 >
                   <Trash2 className="h-4 w-4" strokeWidth={1.75} />
                   Remove
-                </button>
+                </Button>
               </div>
 
               <div className="flex flex-col gap-4 rounded-2xl border border-border/40 bg-surface/80 p-4 md:flex-row md:items-center md:justify-between">
@@ -105,19 +110,23 @@ const CartPage = () => {
                     Quantity
                   </span>
                   <div className="inline-flex items-center gap-3 rounded-full border border-border/40 bg-bg/70 px-4 py-2 text-sm font-semibold text-text">
-                    <button
+                    <Button
                       type="button"
-                      className="text-textSecondary transition hover:text-accent"
+                      variant="ghost"
+                      size="sm"
+                      className="h-8 w-8 rounded-full p-0 text-textSecondary hover:text-accent"
                     >
                       <Minus className="h-4 w-4" strokeWidth={1.75} />
-                    </button>
+                    </Button>
                     <span>{item.quantity}</span>
-                    <button
+                    <Button
                       type="button"
-                      className="text-textSecondary transition hover:text-accent"
+                      variant="ghost"
+                      size="sm"
+                      className="h-8 w-8 rounded-full p-0 text-textSecondary hover:text-accent"
                     >
                       <Plus className="h-4 w-4" strokeWidth={1.75} />
-                    </button>
+                    </Button>
                   </div>
                 </div>
 
@@ -191,7 +200,7 @@ const CartPage = () => {
                       ? "Included"
                       : formatPrice(option.price)}
                   </span>
-                  <input
+                  <Input
                     defaultChecked={option.id === "standard"}
                     type="radio"
                     name="shipping"
@@ -214,12 +223,12 @@ const CartPage = () => {
             <span>{formatPrice(total)}</span>
           </div>
 
-          <button
+          <Button
             type="button"
-            className="inline-flex items-center justify-center rounded-full border border-transparent bg-accent px-6 py-3 text-sm font-semibold text-white shadow-[0_24px_60px_-32px_rgba(139,92,246,0.7)] transition hover:-translate-y-0.5"
+            className="px-6 py-3 text-sm shadow-[0_24px_60px_-32px_rgba(139,92,246,0.7)] hover:-translate-y-0.5"
           >
             Proceed to checkout
-          </button>
+          </Button>
 
           <p className="text-xs text-textSecondary">
             Secured by local banking partners and encrypted payment providers.
