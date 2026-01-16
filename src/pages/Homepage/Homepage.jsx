@@ -5,6 +5,7 @@ import FilterSideBar from "../../components/FilterSideBar/FilterSideBar";
 import ProductCatalog from "../../components/ProductCatalog/ProductCatalog";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import { products } from "../../data/products";
+import { Button } from "../../components/ui/button";
 
 const Homepage = () => {
   const filterGroups = useMemo(() => {
@@ -84,10 +85,10 @@ const Homepage = () => {
               drops land weekly — stay tuned.
             </p>
             <div className="flex flex-wrap items-center gap-3">
-              <button className="inline-flex items-center gap-2 rounded-full border border-transparent bg-accent px-6 py-3 text-sm font-semibold text-white shadow-[0_20px_48px_-28px_rgba(99,102,241,0.9)] transition-transform hover:-translate-y-0.5">
+              <Button variant="secondary">
                 Explore Collection
                 <ArrowRight className="h-4 w-4" strokeWidth={1.75} />
-              </button>
+              </Button>
               <div className="inline-flex items-center gap-3 rounded-full border border-border/40 bg-bg/70 px-5 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-textSecondary">
                 <Shirt className="h-4 w-4 text-accent" strokeWidth={1.75} />
                 Eco Cotton • Fair Ware

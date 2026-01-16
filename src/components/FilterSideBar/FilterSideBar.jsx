@@ -6,6 +6,9 @@ import {
   RotateCcw,
 } from "lucide-react";
 
+import { Button } from "../ui/button";
+import { Input } from "../ui/input";
+
 const iconMap = {
   style: Sparkles,
   fit: SlidersHorizontal,
@@ -28,15 +31,17 @@ const FilterSideBar = ({
       <header className="flex flex-col gap-2">
         <div className="flex items-center justify-between">
           <h2 className="text-lg font-semibold text-text">Filters</h2>
-          <button
+          <Button
             type="button"
+            variant="subtle"
+            size="sm"
             onClick={onResetFilters}
-            className="inline-flex items-center gap-2 rounded-full border border-border/40 bg-surface/80 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-textSecondary transition hover:border-accent/60 hover:text-accent disabled:opacity-50"
+            className="gap-1.5 px-3 py-1 text-[0.7rem] uppercase tracking-[0.18em] text-textSecondary hover:text-accent disabled:opacity-50"
             disabled={!hasActiveFilters}
           >
             <RotateCcw className="h-3.5 w-3.5" strokeWidth={1.75} />
             Reset
-          </button>
+          </Button>
         </div>
         <p className="text-sm text-textSecondary">
           Tune your selection — updates arrive weekly.
@@ -75,13 +80,13 @@ const FilterSideBar = ({
                           : "border-transparent text-text hover:border-border/40 hover:bg-hover/60"
                       }`}
                     >
-                      <input
+                      <Input
                         type="checkbox"
                         name={key}
                         value={option}
-                        className="h-4 w-4 rounded border-border/50 text-accent focus:ring-accent"
                         checked={isActive}
                         onChange={() => onToggleOption?.(key, option)}
+                        className="h-4 w-4"
                       />
                       <span>{option}</span>
                     </label>
