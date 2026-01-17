@@ -25,7 +25,7 @@ const ProductPage = () => {
   }
 
   return (
-    <section className="space-y-10">
+    <div className="space-y-10">
       <header className="flex flex-col gap-5 rounded-[28px] border border-border/50 bg-gradient-to-r from-accent-soft/40 via-surface/80 to-transparent p-8 shadow-[0_32px_80px_-44px_rgba(48,31,23,0.55)] md:flex-row md:items-center md:justify-between">
         <Link
           to="/"
@@ -52,10 +52,19 @@ const ProductPage = () => {
 
       <div className="grid gap-10 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)]">
         <div className="relative flex min-h-[360px] items-center justify-center overflow-hidden rounded-[28px] border border-border/60 bg-gradient-to-br from-accent-soft/50 via-bg/70 to-transparent p-10 shadow-[0_36px_80px_-48px_rgba(46,29,21,0.65)]">
-          <Shirt className="h-32 w-32 text-accent" strokeWidth={1.5} />
-          <span className="absolute bottom-6 left-6 rounded-full border border-border/40 bg-bg/80 px-4 py-2 text-xs font-semibold uppercase tracking-[0.28em] text-textSecondary">
-            Concept imagery
-          </span>
+          {product?.photo?.imageUrl ? (
+            <img
+              src={product.photo.imageUrl}
+              alt={product.photo.alt}
+              loading="lazy"
+              className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+            />
+          ) : (
+            <Shirt
+              className="h-16 w-16 text-accent transition-transform group-hover:scale-110"
+              strokeWidth={1.75}
+            />
+          )}
         </div>
 
         <aside className="flex flex-col gap-6 rounded-[24px] border border-border/50 bg-bg/80 p-6 backdrop-blur-xl">
@@ -83,13 +92,14 @@ const ProductPage = () => {
 
           <Button
             type="button"
+            variant="secondary"
             className="gap-3 px-6 py-3 text-sm shadow-[0_24px_60px_-36px_rgba(214,146,86,0.75)] hover:-translate-y-0.5"
           >
             Join waitlist
           </Button>
         </aside>
       </div>
-    </section>
+    </div>
   );
 };
 

@@ -1,14 +1,104 @@
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import ProductItem from "../ProductItem/ProductItem";
-import { products } from "../../data/products";
 import { Button } from "../ui/button";
+import { fetchTShirtPhotos } from "../../helpers";
+import { products } from "../../data/products";
 
 const ProductCatalog = () => {
   const navigate = useNavigate();
+  const [photos, setPhotos] = useState([]);
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const previousPhotosLengthRef = useRef(0);
 
   const handleSelectProduct = (product) => {
     navigate(`/product/${product.id}`, { state: { product } });
+  };
+
+  useEffect(() => {
+    const controller = new AbortController();
+
+    const loadPhotos = async () => {
+      try {
+        setLoading(true);
+        if (page === 1) {
+          setError(null);
+        }
+
+        const data = await fetchTShirtPhotos({
+          page,
+          signal: controller.signal,
+        });
+        setTotalPages(data?.totalPages ?? null);
+
+        setPhotos((prev) => {
+          const nextPhotos = data?.photos ?? [];
+          if (page === 1) {
+            return nextPhotos;
+          }
+
+          const existingIds = new Set(prev.map((item) => item.id));
+          return [
+            ...prev,
+            ...nextPhotos.filter((item) => !existingIds.has(item.id)),
+          ];
+        });
+      } catch (err) {
+        if (controller.signal.aborted) return;
+        setError(err instanceof Error ? err.message : "Failed to load tees");
+      } finally {
+        if (!controller.signal.aborted) {
+          setLoading(false);
+        }
+      }
+    };
+
+    loadPhotos();
+
+    return () => {
+      controller.abort();
+    };
+  }, [page]);
+
+  const catalogItems = useMemo(() => {
+    if (!photos.length) return [];
+
+    return photos.map((photo, index) => ({
+      ...products[index % products.length],
+      id: `${products[index % products.length].id}-${photo.id}`,
+      photo,
+    }));
+  }, [photos]);
+
+  useEffect(() => {
+    if (page > 1 && photos.length > previousPhotosLengthRef.current) {
+      const newPhoto = photos[previousPhotosLengthRef.current];
+      if (newPhoto?.id) {
+        const target = document.querySelector(
+          `[data-photo-id="${newPhoto.id}"]`
+        );
+        target?.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }
+
+    previousPhotosLengthRef.current = photos.length;
+  }, [photos, page]);
+
+  const isLastPage = useMemo(() => {
+    if (totalPages == null) {
+      return true;
+    }
+    return page >= totalPages;
+  }, [page, totalPages]);
+
+  const handleLoadMore = () => {
+    if (!loading && !isLastPage) {
+      setPage((prev) => prev + 1);
+    }
   };
 
   return (
@@ -18,11 +108,11 @@ const ProductCatalog = () => {
           <h2 className="text-xl font-semibold text-text">
             Latest drops
             <span className="ml-2 text-sm font-medium text-textSecondary">
-              ({products.length})
+              ({catalogItems.length})
             </span>
           </h2>
           <p className="text-sm text-textSecondary">
-            Product gallery placeholder — connect live data when ready.
+            T-shirts curated live from Unsplash creators.
           </p>
         </div>
         <Button
@@ -33,9 +123,25 @@ const ProductCatalog = () => {
         </Button>
       </div>
 
+      {loading && (
+        <div className="flex items-center gap-3 rounded-[20px] border border-border/40 bg-bg/70 px-4 py-3 text-sm text-textSecondary">
+          <span
+            className="h-2 w-2 animate-ping rounded-full bg-accent"
+            aria-hidden
+          />
+          Loading fresh tees from Unsplash...
+        </div>
+      )}
+
+      {error && !loading && (
+        <div className="rounded-[20px] border border-red-200 bg-red-50/80 px-4 py-3 text-sm text-red-700">
+          {error}
+        </div>
+      )}
+
       <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
-        {products.length > 0 ? (
-          products.map((product) => (
+        {catalogItems.length > 0 ? (
+          catalogItems.map((product) => (
             <ProductItem
               key={product.id}
               product={product}
@@ -54,6 +160,20 @@ const ProductCatalog = () => {
           </div>
         )}
       </div>
+
+      {!isLastPage && catalogItems.length > 0 && !error && (
+        <div className="flex justify-center">
+          <Button
+            type="button"
+            variant="secondary"
+            onClick={handleLoadMore}
+            disabled={loading}
+            className="px-6 py-3"
+          >
+            {loading ? "Loading..." : "Load more"}
+          </Button>
+        </div>
+      )}
     </div>
   );
 };
