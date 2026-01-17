@@ -59,12 +59,6 @@ const Homepage = () => {
     });
   };
 
-  const handleResetFilters = () => {
-    setActiveFilters(
-      Object.fromEntries(filterGroups.map(({ key }) => [key, []]))
-    );
-  };
-
   return (
     <section className="flex flex-col gap-10">
       <div className="relative overflow-hidden rounded-[28px] bg-gradient-to-br from-accent-soft/70 via-surface/90 to-transparent p-8 shadow-[0_32px_80px_-40px_rgba(99,102,241,0.55)] md:p-12">
