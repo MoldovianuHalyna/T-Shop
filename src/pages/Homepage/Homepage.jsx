@@ -1,7 +1,6 @@
 import { useMemo, useState } from "react";
 import { ArrowRight, Sparkles, Shirt } from "lucide-react";
 
-import FilterSideBar from "../../components/FilterSideBar/FilterSideBar";
 import ProductCatalog from "../../components/ProductCatalog/ProductCatalog";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import { products } from "../../data/products";
@@ -107,19 +106,9 @@ const Homepage = () => {
         </div>
       </div>
 
-      <div className="grid gap-8 lg:grid-cols-[280px_1fr]">
-        <aside className="h-full overflow-hidden rounded-[24px] bg-surface/80 p-6 backdrop-blur-xl shadow-[0_20px_48px_-28px_rgba(99,102,241,0.9)]">
-          <FilterSideBar
-            filters={filterGroups}
-            selectedFilters={activeFilters}
-            onToggleOption={handleToggleFilter}
-            onResetFilters={handleResetFilters}
-          />
-        </aside>
-        <div className="flex flex-col gap-6">
-          <SearchBar />
-          <ProductCatalog filters={activeFilters} />
-        </div>
+      <div className="flex flex-col gap-6">
+        <SearchBar />
+        <ProductCatalog filters={activeFilters} />
       </div>
     </section>
   );
