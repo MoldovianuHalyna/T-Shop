@@ -13,14 +13,14 @@ const api = axios.create({
 export const fetchTShirtPhotos = async ({ page = 1, signal } = {}) => {
   if (!ACCESS_KEY) {
     throw new Error(
-      "Missing Unsplash access key. Please set VITE_UNSPLASH_ACCESS_KEY in your environment."
+      "Missing Unsplash access key. Please set VITE_UNSPLASH_ACCESS_KEY in your environment.",
     );
   }
 
   const { data } = await api.get("/search/photos", {
     params: {
       client_id: ACCESS_KEY,
-      query: "t-shirt",
+      query: "clothes",
       page,
     },
     signal,

@@ -67,11 +67,16 @@ const ProductCatalog = () => {
   const catalogItems = useMemo(() => {
     if (!photos.length) return [];
 
-    return photos.map((photo, index) => ({
-      ...products[index % products.length],
-      id: `${products[index % products.length].id}-${photo.id}`,
-      photo,
-    }));
+    return photos.map((photo, index) => {
+      const baseProduct = products[index % products.length];
+
+      return {
+        ...baseProduct,
+        baseId: baseProduct.id,
+        id: `${baseProduct.id}-${photo.id}`,
+        photo,
+      };
+    });
   }, [photos]);
 
   useEffect(() => {
@@ -79,7 +84,7 @@ const ProductCatalog = () => {
       const newPhoto = photos[previousPhotosLengthRef.current];
       if (newPhoto?.id) {
         const target = document.querySelector(
-          `[data-photo-id="${newPhoto.id}"]`
+          `[data-photo-id="${newPhoto.id}"]`,
         );
         target?.scrollIntoView({ behavior: "smooth", block: "start" });
       }

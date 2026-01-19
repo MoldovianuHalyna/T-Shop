@@ -4,10 +4,19 @@ import { ArrowLeft, Shirt } from "lucide-react";
 
 import { products } from "../../data/products";
 import { Button } from "../../components/ui/button";
+import useCart from "../../hooks/useCart";
+import { toast } from "react-toastify";
 
 const ProductPage = () => {
   const { id } = useParams();
   const location = useLocation();
+  const { addItem } = useCart();
+  const onAddCartBtnclick = () => {
+    addItem(product, { price: product.price, photo: product.photo });
+    toast.success("Product added to cart", {
+      position: "top-center",
+    });
+  };
 
   const product = useMemo(() => {
     if (location.state?.product) {
@@ -41,12 +50,6 @@ const ProductPage = () => {
           <h1 className="text-3xl font-semibold text-text md:text-4xl">
             {product.title}
           </h1>
-        </div>
-        <div className="flex items-center gap-3 rounded-full border border-border/40 bg-bg/70 px-5 py-2 text-sm font-semibold text-textSecondary">
-          <span className="text-text">{product.price}</span>
-          <span className="text-xs uppercase tracking-[0.2em]">
-            Available soon
-          </span>
         </div>
       </header>
 
@@ -94,8 +97,9 @@ const ProductPage = () => {
             type="button"
             variant="secondary"
             className="gap-3 px-6 py-3 text-sm shadow-[0_24px_60px_-36px_rgba(214,146,86,0.75)] hover:-translate-y-0.5"
+            onClick={onAddCartBtnclick}
           >
-            Join waitlist
+            Add to cart
           </Button>
         </aside>
       </div>

@@ -11,7 +11,7 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          "border-transparent bg-accent text-white shadow-[0_18px_44px_-28px_rgba(139,92,246,0.9)] hover:-translate-y-0.5 hover:shadow-[0_22px_52px_-28px_rgba(139,92,246,0.9)]",
+          "border-transparent bg-transparent text-white shadow-[0_18px_44px_-28px_rgba(139,92,246,0.9)] hover:-translate-y-0.5 hover:shadow-[0_22px_52px_-28px_rgba(139,92,246,0.9)]",
         secondary:
           "border-border/50 bg-surface/80 text-text hover:-translate-y-0.5 hover:border-accent/60",
         outline:
@@ -38,29 +38,7 @@ const buttonVariants = cva(
         square: "rounded-xl",
       },
     },
-    compoundVariants: [
-      {
-        variant: "card",
-        size: "none",
-        class: "rounded-[22px]",
-      },
-      {
-        variant: "icon",
-        size: "icon",
-        class: "rounded-2xl",
-      },
-      {
-        variant: "chip",
-        size: "chip",
-        class: "rounded-full",
-      },
-    ],
-    defaultVariants: {
-      variant: "default",
-      size: "default",
-      shape: "pill",
-    },
-  }
+  },
 );
 
 const Button = React.forwardRef(
@@ -74,7 +52,7 @@ const Button = React.forwardRef(
         {...props}
       />
     );
-  }
+  },
 );
 Button.displayName = "Button";
 

@@ -1,34 +1,9 @@
+import { Link } from "react-router-dom";
 import { Minus, Plus, Trash2, Gift, Truck } from "lucide-react";
 
 import { Button } from "../../components/ui/button";
 import { Input } from "../../components/ui/input";
-
-const cartItems = [
-  {
-    id: "midnight-flux",
-    title: "Midnight Flux Tee",
-    tone: "Deep Navy",
-    size: "L",
-    price: 48,
-    quantity: 1,
-  },
-  {
-    id: "saltfield-classic",
-    title: "Saltfield Classic",
-    tone: "Soft Ecru",
-    size: "M",
-    price: 42,
-    quantity: 2,
-  },
-  {
-    id: "aurora-gradient",
-    title: "Aurora Gradient",
-    tone: "Iridescent Fade",
-    size: "S",
-    price: 58,
-    quantity: 1,
-  },
-];
+import useCart from "../../hooks/useCart";
 
 const shippingOptions = [
   { id: "standard", label: "Standard (3-5 days)", price: 0 },
@@ -38,13 +13,38 @@ const shippingOptions = [
 const formatPrice = (value) => `$${value.toFixed(2)}`;
 
 const CartPage = () => {
-  const productsSubtotal = cartItems.reduce(
+  const { items, incrementItem, decrementItem, removeItem, clearCart } =
+    useCart();
+
+  const productsSubtotal = items.reduce(
     (acc, item) => acc + item.price * item.quantity,
-    0
+    0,
   );
   const shipping = shippingOptions[0].price;
   const taxes = productsSubtotal * 0.12;
   const total = productsSubtotal + shipping + taxes;
+
+  if (items.length === 0) {
+    return (
+      <section className="flex flex-col items-center gap-6 py-16 text-center">
+        <div className="flex h-20 w-20 items-center justify-center rounded-3xl border border-border/50 bg-bg/80 shadow-[0_20px_48px_-28px_rgba(99,102,241,0.6)]">
+          <Truck className="h-10 w-10 text-accent" strokeWidth={1.75} />
+        </div>
+        <div className="space-y-3">
+          <h1 className="text-3xl font-semibold text-text">
+            Your cart is empty
+          </h1>
+          <p className="max-w-md text-sm text-textSecondary">
+            Explore the latest drops and add tees that match your mood. Items
+            you like will appear here for a quick checkout.
+          </p>
+        </div>
+        <Button asChild className="px-6 py-3">
+          <Link to="/">Return to catalog</Link>
+        </Button>
+      </section>
+    );
+  }
 
   return (
     <section className="flex flex-col gap-10">
@@ -52,19 +52,31 @@ const CartPage = () => {
         <span className="text-xs font-semibold uppercase tracking-[0.3em] text-textSecondary">
           Cart
         </span>
-        <h1 className="text-4xl font-semibold text-text md:text-5xl">
-          Ready for checkout
-        </h1>
-        <p className="max-w-2xl text-sm text-textSecondary md:text-base">
-          All items are crafted in limited runs. Review sizing, delivery, and
-          gift options before securing your wash. Stock is reserved for 15
-          minutes.
-        </p>
+        <div className="flex flex-wrap items-center justify-between gap-4">
+          <div>
+            <h1 className="text-4xl font-semibold text-text md:text-5xl">
+              Ready for checkout
+            </h1>
+            <p className="max-w-2xl text-sm text-textSecondary md:text-base">
+              All items are crafted in limited runs. Review sizing, delivery,
+              and gift options before securing your wash. Stock is reserved for
+              15 minutes.
+            </p>
+          </div>
+          <Button
+            type="button"
+            variant="subtle"
+            onClick={clearCart}
+            className="px-4 py-2 text-xs uppercase tracking-[0.25em]"
+          >
+            Clear cart
+          </Button>
+        </div>
       </header>
 
       <div className="grid gap-8 lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]">
         <div className="space-y-4">
-          {cartItems.map((item) => (
+          {items.map((item) => (
             <article
               key={item.id}
               className="group relative flex flex-col gap-6 rounded-[24px] border border-border/50 bg-bg/80 p-6 shadow-[0_26px_64px_-40px_rgba(28,10,36,0.55)] transition hover:-translate-y-1"
@@ -97,6 +109,7 @@ const CartPage = () => {
                   type="button"
                   variant="subtle"
                   size="sm"
+                  onClick={() => removeItem(item.id)}
                   className="gap-2 border-border/40 bg-surface/80 px-4 py-2 uppercase tracking-[0.2em] text-textSecondary hover:border-accent hover:text-accent"
                 >
                   <Trash2 className="h-4 w-4" strokeWidth={1.75} />
@@ -114,6 +127,7 @@ const CartPage = () => {
                       type="button"
                       variant="ghost"
                       size="sm"
+                      onClick={() => decrementItem(item.id)}
                       className="h-8 w-8 rounded-full p-0 text-textSecondary hover:text-accent"
                     >
                       <Minus className="h-4 w-4" strokeWidth={1.75} />
@@ -123,6 +137,7 @@ const CartPage = () => {
                       type="button"
                       variant="ghost"
                       size="sm"
+                      onClick={() => incrementItem(item.id)}
                       className="h-8 w-8 rounded-full p-0 text-textSecondary hover:text-accent"
                     >
                       <Plus className="h-4 w-4" strokeWidth={1.75} />
