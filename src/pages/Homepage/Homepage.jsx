@@ -1,5 +1,11 @@
 import { useState } from "react";
-import { ArrowRight, Sparkles, Shirt, ShoppingCart } from "lucide-react";
+import {
+  ArrowRight,
+  Sparkles,
+  Shirt,
+  ShoppingCart,
+  MoveUp,
+} from "lucide-react";
 
 import ProductCatalog from "../../components/ProductCatalog/ProductCatalog";
 import SearchBar from "../../components/SearchBar/SearchBar";
@@ -62,6 +68,14 @@ const Homepage = () => {
           onSearchChange={(value) => setSearchTerm(value)}
         />
         <ProductCatalog filters={{}} searchTerm={searchTerm} />
+        <Button
+          variant="outline"
+          size="icon"
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          className="fixed bottom-4 right-4"
+        >
+          <MoveUp />
+        </Button>
       </div>
     </section>
   );
