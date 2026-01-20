@@ -6,7 +6,7 @@ import { Button } from "../ui/button";
 import { fetchTShirtPhotos } from "../../helpers";
 import { products } from "../../data/products";
 
-const ProductCatalog = () => {
+const ProductCatalog = ({ filters = {}, searchTerm = "" }) => {
   const navigate = useNavigate();
   const [photos, setPhotos] = useState([]);
   const [page, setPage] = useState(1);
@@ -79,6 +79,40 @@ const ProductCatalog = () => {
     });
   }, [photos]);
 
+  const filteredItems = useMemo(() => {
+    const activeFilterEntries = Object.entries(filters ?? {}).filter(
+      ([, values]) => Array.isArray(values) && values.length > 0,
+    );
+
+    const normalizedSearch = searchTerm.trim().toLowerCase();
+
+    return catalogItems.filter((product) => {
+      const matchesFilters = activeFilterEntries.every(([key, values]) =>
+        values.includes(product[key]),
+      );
+
+      if (!matchesFilters) return false;
+
+      if (!normalizedSearch) {
+        return true;
+      }
+
+      const searchableFields = [
+        product.title,
+        product.tone,
+        product.style,
+        product.fit,
+        product.materialTag,
+        product.palette,
+        product.description,
+      ];
+
+      return searchableFields.some((field) =>
+        field?.toLowerCase().includes(normalizedSearch),
+      );
+    });
+  }, [catalogItems, filters, searchTerm]);
+
   useEffect(() => {
     if (page > 1 && photos.length > previousPhotosLengthRef.current) {
       const newPhoto = photos[previousPhotosLengthRef.current];
@@ -113,7 +147,7 @@ const ProductCatalog = () => {
           <h2 className="text-xl font-semibold text-text">
             Latest drops
             <span className="ml-2 text-sm font-medium text-textSecondary">
-              ({catalogItems.length})
+              ({filteredItems.length})
             </span>
           </h2>
           <p className="text-sm text-textSecondary">
@@ -145,8 +179,8 @@ const ProductCatalog = () => {
       )}
 
       <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
-        {catalogItems.length > 0 ? (
-          catalogItems.map((product) => (
+        {filteredItems.length > 0 ? (
+          filteredItems.map((product) => (
             <ProductItem
               key={product.id}
               product={product}
@@ -166,7 +200,7 @@ const ProductCatalog = () => {
         )}
       </div>
 
-      {!isLastPage && catalogItems.length > 0 && !error && (
+      {!isLastPage && filteredItems.length > 0 && !error && (
         <div className="flex justify-center">
           <Button
             type="button"
