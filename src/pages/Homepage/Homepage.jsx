@@ -33,10 +33,6 @@ const Homepage = () => {
                 drops land weekly — stay tuned.
               </p>
               <div className="flex flex-wrap items-center gap-3">
-                <Button variant="secondary">
-                  Explore Collection
-                  <ArrowRight className="h-4 w-4" strokeWidth={1.75} />
-                </Button>
                 <div className="inline-flex items-center gap-3 rounded-full border border-border/40 bg-bg/70 px-5 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-textSecondary">
                   <Shirt className="h-4 w-4 text-accent" strokeWidth={1.75} />
                   Eco Cotton • Fair Ware

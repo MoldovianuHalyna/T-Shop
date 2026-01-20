@@ -1,4 +1,4 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { ShoppingBag, Shirt, Sun, Moon } from "lucide-react";
 
 import { Button } from "../ui/button";
@@ -11,6 +11,8 @@ const links = [
 
 const NavigationBar = ({ onToggleTheme, theme }) => {
   const isDark = theme === "dark";
+
+  const navigate = useNavigate();
 
   return (
     <header className="sticky top-0 z-50 w-full backdrop-blur-xl">
@@ -68,16 +70,8 @@ const NavigationBar = ({ onToggleTheme, theme }) => {
             {isDark ? <Sun size={20} /> : <Moon size={20} />}
           </Button>
 
-          <Button
-            asChild
-            shape="pill"
-            className="px-5 py-2"
-            variant="secondary"
-          >
-            <Link to="/cart">
-              <ShoppingBag className="h-4 w-4" strokeWidth={1.75} />
-              Shop Now
-            </Link>
+          <Button variant="outline" onClick={() => navigate("/")}>
+            Shop Now
           </Button>
         </div>
       </div>
