@@ -5,6 +5,7 @@ import { Button } from "../../components/ui/button";
 import { Input } from "../../components/ui/input";
 import useCart from "../../hooks/useCart";
 import { toast } from "react-toastify";
+import useIsMobileView from "@/hooks/useIsMobileView";
 
 const shippingOptions = [
   { id: "standard", label: "Standard (3-5 days)", price: 0 },
@@ -24,6 +25,8 @@ const CartPage = () => {
   const shipping = shippingOptions[0].price;
   const taxes = productsSubtotal * 0.12;
   const total = productsSubtotal + shipping + taxes;
+
+  const isMobileView = useIsMobileView();
 
   const onRemoveBtn = (id) => {
     removeItem(id);
@@ -57,31 +60,22 @@ const CartPage = () => {
 
   return (
     <section className="flex flex-col gap-10">
-      <header className="flex flex-col gap-3">
-        <span className="text-xs font-semibold uppercase tracking-[0.3em] text-textSecondary">
-          Cart
-        </span>
-        <div className="flex flex-wrap items-center justify-between gap-4">
-          <div>
-            <h1 className="text-4xl font-semibold text-text md:text-5xl">
-              Ready for checkout
-            </h1>
-            <p className="max-w-2xl text-sm text-textSecondary md:text-base">
-              All items are crafted in limited runs. Review sizing, delivery,
-              and gift options before securing your wash. Stock is reserved for
-              15 minutes.
-            </p>
+      {!isMobileView && (
+        <header className="flex flex-col gap-3">
+          <div className="flex flex-wrap items-center justify-between gap-4">
+            <div>
+              <h1 className="text-4xl font-semibold text-text md:text-5xl">
+                Ready for checkout
+              </h1>
+              <p className="max-w-2xl text-sm text-textSecondary md:text-base">
+                All items are crafted in limited runs. Review sizing, delivery,
+                and gift options before securing your wash. Stock is reserved
+                for 15 minutes.
+              </p>
+            </div>
           </div>
-          <Button
-            type="button"
-            variant="subtle"
-            onClick={clearCart}
-            className="px-4 py-2 text-xs uppercase tracking-[0.25em]"
-          >
-            Clear cart
-          </Button>
-        </div>
-      </header>
+        </header>
+      )}
 
       <div className="grid gap-8 lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]">
         <div className="space-y-4">
@@ -247,11 +241,9 @@ const CartPage = () => {
             <span>{formatPrice(total)}</span>
           </div>
 
-          <Button
-            type="button"
-            className="px-6 py-3 text-sm shadow-[0_24px_60px_-32px_rgba(139,92,246,0.7)] hover:-translate-y-0.5"
-          >
-            Proceed to checkout
+          <Button variant="secondary">Proceed to checkout</Button>
+          <Button type="button" variant="outline" onClick={clearCart}>
+            Clear cart
           </Button>
 
           <p className="text-xs text-textSecondary">

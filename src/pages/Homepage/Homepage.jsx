@@ -1,19 +1,21 @@
 import { useState } from "react";
-import { ArrowRight, Sparkles, Shirt } from "lucide-react";
+import { ArrowRight, Sparkles, Shirt, ShoppingCart } from "lucide-react";
 
 import ProductCatalog from "../../components/ProductCatalog/ProductCatalog";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import { Button } from "../../components/ui/button";
 import useIsMobileView from "@/hooks/useIsMobileView";
+import { useNavigate } from "react-router-dom";
 
 const Homepage = () => {
   const [searchTerm, setSearchTerm] = useState("");
+  const navigate = useNavigate();
 
   const isMobileView = useIsMobileView();
 
   return (
     <section className="flex flex-col gap-10">
-      {!isMobileView && (
+      {!isMobileView ? (
         <div className="relative overflow-hidden rounded-[28px] bg-gradient-to-br from-accent-soft/70 via-surface/90 to-transparent p-8 shadow-[0_32px_80px_-40px_rgba(99,102,241,0.55)] md:p-12">
           <div className="absolute -right-6 -top-16 hidden h-40 w-40 rotate-12 rounded-full bg-accent-soft blur-3xl md:block" />
           <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
@@ -52,6 +54,10 @@ const Homepage = () => {
             </div>
           </div>
         </div>
+      ) : (
+        <Button variant="icon" onClick={() => navigate("/cart")}>
+          <ShoppingCart />
+        </Button>
       )}
 
       <div className="flex flex-col gap-6">
