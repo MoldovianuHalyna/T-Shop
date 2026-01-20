@@ -4,6 +4,7 @@ import { Minus, Plus, Trash2, Gift, Truck } from "lucide-react";
 import { Button } from "../../components/ui/button";
 import { Input } from "../../components/ui/input";
 import useCart from "../../hooks/useCart";
+import { toast } from "react-toastify";
 
 const shippingOptions = [
   { id: "standard", label: "Standard (3-5 days)", price: 0 },
@@ -23,6 +24,14 @@ const CartPage = () => {
   const shipping = shippingOptions[0].price;
   const taxes = productsSubtotal * 0.12;
   const total = productsSubtotal + shipping + taxes;
+
+  const onRemoveBtn = (id) => {
+    removeItem(id);
+    toast.success("Product removed from cart", {
+      position: "top-center",
+      autoClose: 1500,
+    });
+  };
 
   if (items.length === 0) {
     return (
@@ -109,7 +118,7 @@ const CartPage = () => {
                   type="button"
                   variant="subtle"
                   size="sm"
-                  onClick={() => removeItem(item.id)}
+                  onClick={() => onRemoveBtn(item.id)}
                   className="gap-2 border-border/40 bg-surface/80 px-4 py-2 uppercase tracking-[0.2em] text-textSecondary hover:border-accent hover:text-accent"
                 >
                   <Trash2 className="h-4 w-4" strokeWidth={1.75} />
