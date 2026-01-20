@@ -4,7 +4,7 @@ import { Formik, Form, Field } from "formik";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 
-const trendingTags = ["Sage", "Oversized", "Graphic", "Relaxed", "New Drop"];
+const trendingTags = ["Minimalistic", "Oversized", "Graphic", "Relaxed", "New"];
 
 const SearchBar = ({ searchTerm = "", onSearchChange }) => {
   return (
@@ -39,14 +39,6 @@ const SearchBar = ({ searchTerm = "", onSearchChange }) => {
                 )}
               </Field>
             </div>
-            <Button
-              type="button"
-              variant="secondary"
-              className="px-4 py-3 hover:-translate-y-0.5 hover:border-accent hover:shadow-[0_18px_40px_-24px_rgba(99,102,241,0.65)]"
-            >
-              <SlidersHorizontal className="h-4 w-4" strokeWidth={1.75} />
-              Filters
-            </Button>
           </div>
           <div className="flex flex-wrap items-center gap-3">
             <span className="text-xs font-semibold uppercase tracking-[0.25em] text-textSecondary">
