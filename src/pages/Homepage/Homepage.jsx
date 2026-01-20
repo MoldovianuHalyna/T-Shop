@@ -1,63 +1,12 @@
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { ArrowRight, Sparkles, Shirt } from "lucide-react";
 
 import ProductCatalog from "../../components/ProductCatalog/ProductCatalog";
 import SearchBar from "../../components/SearchBar/SearchBar";
-import { products } from "../../data/products";
 import { Button } from "../../components/ui/button";
 
 const Homepage = () => {
-  const filterGroups = useMemo(() => {
-    const uniqueValues = (key) =>
-      Array.from(new Set(products.map((product) => product[key]))).sort();
-
-    return [
-      {
-        key: "style",
-        title: "Style",
-        description: "Pick the vibe that matches your mood.",
-        options: uniqueValues("style"),
-      },
-      {
-        key: "fit",
-        title: "Fit",
-        description: "Dial in the silhouette you love.",
-        options: uniqueValues("fit"),
-      },
-      {
-        key: "materialTag",
-        title: "Material",
-        description: "Responsibly sourced fabrics only.",
-        options: uniqueValues("materialTag"),
-      },
-      {
-        key: "palette",
-        title: "Palette",
-        description: "Switch up your tonal story.",
-        options: uniqueValues("palette"),
-      },
-    ];
-  }, []);
-
-  const [activeFilters, setActiveFilters] = useState(() =>
-    Object.fromEntries(filterGroups.map(({ key }) => [key, []]))
-  );
-
-  const handleToggleFilter = (groupKey, option) => {
-    setActiveFilters((prev) => {
-      const current = new Set(prev[groupKey] ?? []);
-      if (current.has(option)) {
-        current.delete(option);
-      } else {
-        current.add(option);
-      }
-
-      return {
-        ...prev,
-        [groupKey]: Array.from(current),
-      };
-    });
-  };
+  const [searchTerm, setSearchTerm] = useState("");
 
   return (
     <section className="flex flex-col gap-10">
@@ -101,8 +50,11 @@ const Homepage = () => {
       </div>
 
       <div className="flex flex-col gap-6">
-        <SearchBar />
-        <ProductCatalog filters={activeFilters} />
+        <SearchBar
+          searchTerm={searchTerm}
+          onSearchChange={(value) => setSearchTerm(value)}
+        />
+        <ProductCatalog filters={{}} searchTerm={searchTerm} />
       </div>
     </section>
   );
